@@ -1,6 +1,6 @@
 body {
-    color: white;
-    background-color: #000;
+    color: #ffffff;
+    background-color: #696969;
     display: flex;
     justify-content: center;
 }
@@ -14,19 +14,19 @@ body {
 }
  
 .button {
-    color: white;
+    color: #ffffff;
     position: absolute;
-    background-color: transparent;
-    border: 2px outset #fff;
+    background-color: #dcdcdc;
+    border: 5px outset #000000;
     font-size: 20px;
 }
  
 #start {
-    color: white;
+    color: #ffffff;
     position: absolute;
-    background-color: transparent;
-    width: 60px;
+    background-color: #191970;
+    width: 360px;
     height: 60px;
-    top: 570px;
-    border: 2px outset #fff;
+    top: 560px;
+    border: 5px outset #000000;
 }

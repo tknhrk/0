@@ -1,15 +1,15 @@
-const BUTTONS_TOP = 470;
-const BUTTONS_HEIGHT = 70;
+const BUTTONS_TOP = 450;
+const BUTTONS_HEIGHT = 90;
  
-const LANE_WIDTH = 70;
-const LANE_LEFTS = [10, 100, 190, 280];
-const BLOCK_HEIGHT = 70;
+const LANE_WIDTH = 90;
+const LANE_LEFTS = [0, 90, 180, 270];
+const BLOCK_HEIGHT = 90;
  
 const HIT_Y_MIN = BUTTONS_TOP - BLOCK_HEIGHT;
 const HIT_Y_MAX = BUTTONS_TOP + BUTTONS_HEIGHT;
  
 const CANVAS_WIDTH = 360;
-const CANVAS_HEIGHT = 540;
+const CANVAS_HEIGHT = 445;
  
 const $start = document.getElementById('start');
 const $zero = document.getElementById('zero');
@@ -150,7 +150,7 @@ class Block{
  
     Draw(){
         ctx.fillStyle = '#dcdcdc';
-        ctx.fillRect(this.X, this.Y + 20, this.Width, this.Height - 40);
+        ctx.fillRect(this.X, this.Y + 20, this.Width, this.Height - 80);
     }
 }
 
