@@ -1,0 +1,30 @@
+body {
+    color: white;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+}
+ 
+#container {
+    width: 360px;
+}
+ 
+#field {
+    position: relative;
+}
+ 
+.button {
+    color: white;
+    position: absolute;
+    background-color: transparent;
+}
+ 
+#start {
+    color: white;
+    position: absolute;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+    border: 2px outset #fff;
+}
+ 
