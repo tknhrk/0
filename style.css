@@ -4,6 +4,14 @@ body {
     display: flex;
     justify-content: center;
 }
+
+.course {
+    color: #ffffff;
+    position: absolute;
+    background-color: #191970;
+    border: 5px outset #000000;
+    font-size: 20px;
+}
  
 #container {
     width: 360px;
