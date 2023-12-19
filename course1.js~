@@ -175,4 +175,101 @@ function setPositionButtons(){
     }
 }
 
+function addEventListeners(){
+    $start.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        gameStart();
+    });
+ 
+    const buttons = [$zero, $one, $two, $three];
+    const events = ['mousedown', 'touchstart'];
+ 
+    for(let i = 0; i < LANE_LEFTS.length; i++){
+        for(let k = 0; k < events.length; k++){
+            buttons[i].addEventListener(events[k], (ev) => {
+                ev.preventDefault();
+ 
+                if(!isPlaying)
+                    return;
+ 
+                const hits = blocks.filter(rect => !rect.IsHit && rect.X == LANE_LEFTS[i] && HIT_Y_MIN < rect.Y && rect.Y < HIT_Y_MAX);
+                if(hits.length > 0){
+                    hits[0].IsHit = true;
+                    onHit(i);
+                }
+                else
+                    onMiss(i);
+            });
+        }
+    }
+}
 
+setInterval(() => {
+    if(!isPlaying)
+        return;
+ 
+    clearCanvas();
+    drawLanes();
+ 
+    blocks.forEach(block => block.Update());
+    blocks.forEach(block => block.Draw());
+ 
+    hitLaneNumbers.forEach(num => drawHit(num));
+    throughLaneNumbers.forEach(num => drawThrough(num));
+    missLaneNumbers.forEach(num => drawMiss(num));
+ 
+    ctx.font = '20px bold ＭＳ ゴシック';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(`CRITICAL:${hitCount} NEAR:${missCount} ERROR:${throughCount}`, 10, 10);
+}, 1000 / 60);
+
+function gameStart(){
+    blocks.length = 0;
+ 
+    for(let i=0; i < 2000; i += 1)
+        blocks.push(new Block(Math.floor(Math.random() * 4), i));
+    
+    hitCount = 0;
+    missCount = 0;
+    throughCount = 0;
+ 
+    speed = 8;
+    isPlaying = true;
+ 
+    setTimeout(() => {
+        blocks = blocks.filter(rect => rect.Y > -10 && rect.Y < CANVAS_HEIGHT);
+    }, 1000 * 30);
+ 
+    setTimeout(async() => {
+        isPlaying = false;
+	
+        const resultText = `CRITICAL:${hitCount}\nNEAR:${missCount}\nERROR:${throughCount}`;
+        showResult(resultText);
+    }, 1000 * 33);
+}
+
+function showResult(resultText){
+    const arr = resultText.split('\n');
+    if(arr.length < 3)
+        return;
+ 
+    ctx.fillStyle = '#ff0';
+    ctx.font = '20px bold ＭＳ ゴシック';
+ 
+    const textWidth1 = ctx.measureText('結果').width;
+    const x1 =  (CANVAS_WIDTH - textWidth1) / 2;
+    ctx.fillStyle = '#fff';
+    ctx.fillText('結果', x1, 160);
+ 
+    const textWidth = ctx.measureText(arr[1]).width;
+    const x =  (CANVAS_WIDTH - textWidth) / 2;
+    ctx.fillStyle = '#ff0';
+    ctx.fillText(arr[0], x, 200);
+    ctx.fillStyle = '#fff';
+    ctx.fillText(arr[1], x, 230);
+    ctx.fillStyle = '#fff';
+    ctx.fillText(arr[2], x, 260);
+ 
+    $start.style.display = 'block';
+}
