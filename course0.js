@@ -221,7 +221,7 @@ setInterval(() => {
     ctx.font = '20px bold ＭＳ ゴシック';
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#fff';
-    ctx.fillText(`CRITICAL:${hitCount} NEAR:${missCount} ERROR:${throughCount}`, 10, 10);
+    ctx.fillText(`CRITICAL:${hitCount} ERROR:${missCount+throughCount}`, 10, 10);
 }, 1000 / 60);
 
 function gameStart(){
@@ -244,7 +244,7 @@ function gameStart(){
     setTimeout(async() => {
         isPlaying = false;
 	
-        const resultText = `CRITICAL:${hitCount}\nNEAR:${missCount}\nERROR:${throughCount}`;
+        const resultText = `CRITICAL:${hitCount}\nERROR:${missCount+throughCount}`;
         showResult(resultText);
     }, 1000 * 33);
 }
